@@ -1,7 +1,7 @@
 <template lang="html">
   <div>
     <div class="top">
-      <a href="#" class="close">关闭</a>
+      <router-link :to="{ name: 'Home' }" class="close">关闭</router-link>
       <form action="" method="get">
         <div>
           <input type="search" name="query">
