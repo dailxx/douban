@@ -1,66 +1,74 @@
 <template lang="html">
   <div>
-    <m-nav></m-nav>
+    <m-header></m-header>
     <div class="page">
-      <div class="card">
-        <ul class="quick-nav">
-          <li><a href="#">影院热映</a></li>
-          <li><a href="#">最受关注图书</a></li>
-          <li><a href="#">豆瓣时间</a></li>
-          <li><a href="#">使用豆瓣App</a></li>
-        </ul>
-      </div>
+      <quick-nav></quick-nav>
+      <template v-if="feedlist.length">
+        <scroll ref="scroll" :data="feedlist">
+          <div v-for="feed in feedlist">
+            <feed-item
+              :title="feed.title"
+              :desc="feed.target.desc"
+              :source="feed.source_cn"
+              :image-url="feed.target.cover_url"
+              :author="feed.target.author.name"
+              :key="feed.id"/>
+          </div>
+        </scroll>
+      </template>
+      <template v-else>
+        <loading></loading>
+      </template>
     </div>
   </div>
 </template>
 
 <script>
-import MNav from '@/components/home/nav/nav'
+  import MHeader from './nav'
+  import QuickNav from './quick-nav'
+  import Loading from '../base/loading/loading'
+  import * as api from '@/api/api'
+  import Scroll from '../base/scroll/scroll'
+  import FeedItem from './feed-item'
 
-export default {
-  components: {
-    MNav
+  export default {
+    data() {
+      return {
+        feedlist: []
+      }
+    },
+    mounted() {
+      this.fetchData()
+    },
+    methods: {
+      // 获取列表数据内容
+      fetchData() {
+        api.getRecommendFeedList().then((data) => {
+          this.feedlist = data.recommend_feeds;
+        }).catch((error) => {
+          console.log(error);
+        })
+      }
+    },
+    watch: {
+
+    },
+    components: {
+      MHeader,
+      QuickNav,
+      Loading,
+      Scroll,
+      FeedItem
+    }
   }
-}
 </script>
 
-<style lang="css">
-  a {
-    text-decoration: none;
-    text-align: center;
-  }
+<style lang="css" scoped>
   .page {
     padding-top: 47px;
     max-width: 650px;
     background-color: #fff;
     margin: 0 auto;
     overflow-x: hidden;
-    height: 200px;
-  }
-  .card {
-    margin: 0 18px;
-    height: 200px;
-  }
-  .quick-nav {
-    overflow: hidden;
-    display: block;
-    list-style: none;
-    padding: 6px 0 0 0;
-    margin: 20px 0 0 0;
-  }
-  .quick-nav li {
-    float: left;
-    width: 50%;
-    padding: 3px;
-    box-sizing: border-box;
-    font-size: 15px;
-  }
-  .quick-nav li a {
-    background-color: #f6f6f6;
-    color: #494949;
-    display: block;
-    text-align: center;
-    padding: 12px 0;
-    border-radius: 2px;
   }
 </style>

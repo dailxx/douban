@@ -17,11 +17,6 @@
   </div>
 </template>
 
-<script>
-export default {
-}
-</script>
-
 <style lang="css" scoped>
   .header {
     position: fixed;
@@ -46,7 +41,7 @@ export default {
     display: inline-block;
     width: 46px;
     height: 22px;
-    background-image: url('../../../assets/image/logo.png');
+    background-image: url('../../assets/image/logo.png');
     background-size: cover;
   }
   ul {
@@ -66,7 +61,7 @@ export default {
     top: 4px;
     width: 25px;
     height: 18px;
-    background-image: url('../../../assets/image/search.png');
+    background-image: url('../../assets/image/search.png');
     background-size: cover;
   }
 </style>
