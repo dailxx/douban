@@ -1,13 +1,37 @@
 <template lang="html">
   <div>
-    电影页面
+    <scroll :data="list" style="height: 200px; overflow:hidden;">
+      <div>
+        <p v-for="(n, idx) in list" style="color: #000">{{ idx }}</p>
+      </div>
+    </scroll>
   </div>
 </template>
 
 <script>
-export default {
-}
+  import Scroll from '../base/scroll/scroll'
+  import BScroll from 'better-scroll'
+
+  export default {
+    data() {
+      return {
+        list: []
+      }
+    },
+    mounted() {
+      setTimeout(() => {
+        this.list = new Array(100).fill(1);
+      }, 1500);
+    },
+    components: {
+      Scroll
+    }
+  }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
+  * {
+    margin: 0;
+    padding: 0;
+  }
 </style>

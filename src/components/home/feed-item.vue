@@ -2,14 +2,14 @@
   <a href="#" class="item">
     <div class="content">
       <div class="desc">
-        <h3>{{ title }}</h3>
-        <p>{{ desc }}</p>
+        <h3>{{ feed.title }}</h3>
+        <p>{{ feed.target.desc }}</p>
       </div>
-      <!-- <img :src="imageUrl"> -->
+      <!-- <img :src="feed.target.cover_url"> -->
     </div>
     <div class="other">
-      <span>by {{ author }}</span>
-      <span>{{ source }}</span>
+      <span>by {{ feed.target.author.name }}</span>
+      <span>{{ feed.source_cn }}</span>
     </div>
   </a>
 </template>
@@ -17,14 +17,9 @@
 <script>
   export default {
     props: {
-      title: String,
-      desc: String,
-      source: String,
-      imageUrl: String,
-      author: String,
-      layout: {
-        type: Number,
-        default: 1
+      feed: {
+        type: Object,
+        required: true
       }
     }
   }
@@ -45,6 +40,7 @@
     margin-left: 18px;
     color: #494949;
     border-bottom: 1px solid #e3e3e3;
+    box-sizing: border-box;
   }
   .content {
     display: flex;

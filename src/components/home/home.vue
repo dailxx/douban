@@ -1,24 +1,22 @@
 <template lang="html">
-  <div>
+  <div class="wrapper">
     <m-header></m-header>
     <div class="page">
-      <quick-nav></quick-nav>
-      <template v-if="feedlist.length">
-        <scroll ref="scroll" :data="feedlist">
-          <div v-for="feed in feedlist">
-            <feed-item
-              :title="feed.title"
-              :desc="feed.target.desc"
-              :source="feed.source_cn"
-              :image-url="feed.target.cover_url"
-              :author="feed.target.author.name"
-              :key="feed.id"/>
-          </div>
-        </scroll>
-      </template>
-      <template v-else>
-        <loading></loading>
-      </template>
+      <scroll :data="feedlist" class="scroll">
+        <div>
+          <quick-nav></quick-nav>
+          <template v-if="feedlist.length">
+            <div>
+              <feed-item v-for="feed in feedlist" :feed="feed" :key="feed.id"/>
+            </div>
+          </template>
+          <template v-else>
+            <div class="loadingContainer">
+              <loading></loading>
+            </div>
+          </template>
+        </div>
+      </scroll>
     </div>
   </div>
 </template>
@@ -64,11 +62,28 @@
 </script>
 
 <style lang="css" scoped>
+  .wrapper {
+    height: 100%;
+  }
   .page {
+    height: 100%;
     padding-top: 47px;
     max-width: 650px;
     background-color: #fff;
     margin: 0 auto;
-    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+  .scroll {
+    height: 100%;
+  }
+  .loadingContainer {
+    position: absolute;
+    top: 175px;
+    width: 100%;
+    height: 100vh;
+    background-color: #fff;
+    padding-top: 40px;
+    display: flex;
+    justify-content: center;
   }
 </style>

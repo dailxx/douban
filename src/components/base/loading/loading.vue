@@ -1,7 +1,5 @@
 <template lang="html">
-  <div class="loading">
-    <div class="smile"></div>
-  </div>
+  <div class="smile"></div>
 </template>
 
 <script>
@@ -10,13 +8,6 @@
 </script>
 
 <style lang="css" scoped>
-  .loading {
-    height: 300px;
-    display: flex;
-    background-color: #fff;
-    justify-content: center;
-    align-items: center;
-  }
   .smile {
     background-repeat: no-repeat;
     background-image: url('../../../assets/image/loading_green.gif');

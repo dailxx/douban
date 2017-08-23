@@ -19,8 +19,8 @@
   .quick-nav {
     display: flex;
     flex-direction: column;
-    margin: 20px 18px 0;
-    padding-top: 6px;
+    margin: 0 18px;
+    padding-top: 26px;
   }
   .quick-nav div {
     display: flex;
