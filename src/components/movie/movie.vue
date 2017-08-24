@@ -9,14 +9,16 @@
 </template>
 
 <script>
-  import Scroll from '../base/scroll/scroll'
+  import Scroll from 'base/scroll/scroll'
   import BScroll from 'better-scroll'
-  import jsonp from '@/common/js/jsonp'
+  import jsonp from 'common/js/jsonp'
 
   export default {
     data() {
       return {
-        list: []
+        showingList: [],
+        freeList: [],
+        comingList: []
       }
     },
     mounted() {

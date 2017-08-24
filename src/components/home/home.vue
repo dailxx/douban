@@ -24,9 +24,9 @@
 <script>
   import MHeader from './nav'
   import QuickNav from './quick-nav'
-  import Loading from '../base/loading/loading'
-  import * as api from '@/api/api'
-  import Scroll from '../base/scroll/scroll'
+  import Loading from 'base/loading/loading'
+    import Scroll from 'base/scroll/scroll'
+  import { getRecommend } from 'api/home'
   import FeedItem from './feed-item'
 
   export default {
@@ -41,7 +41,7 @@
     methods: {
       // 获取列表数据内容
       fetchData() {
-        api.getRecommendFeedList().then((data) => {
+        getRecommend().then((data) => {
           this.feedlist = data.recommend_feeds;
         }).catch((error) => {
           console.log(error);
