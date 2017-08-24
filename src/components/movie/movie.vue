@@ -11,6 +11,7 @@
 <script>
   import Scroll from '../base/scroll/scroll'
   import BScroll from 'better-scroll'
+  import jsonp from '@/common/js/jsonp'
 
   export default {
     data() {
@@ -19,9 +20,13 @@
       }
     },
     mounted() {
-      setTimeout(() => {
-        this.list = new Array(100).fill(1);
-      }, 1500);
+      jsonp('api/v2/subject_collection/movie_showing/items?os=ios&start=0&count=8')
+        .then((data) => {
+          console.log(data)
+        })
+      // axios.get('/v2/movie/in_theaters').then((response) => {
+      //   console.log(response.data)
+      // })
     },
     components: {
       Scroll

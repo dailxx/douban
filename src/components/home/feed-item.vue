@@ -5,7 +5,7 @@
         <h3>{{ feed.title }}</h3>
         <p>{{ feed.target.desc }}</p>
       </div>
-      <!-- <img :src="feed.target.cover_url"> -->
+      <img :src="feed.target.cover_url | imageUrlFilter" v-show="feed.target.cover_url.length">
     </div>
     <div class="other">
       <span>by {{ feed.target.author.name }}</span>
@@ -64,6 +64,10 @@
     color: #aaa;
     font-size: 12px;
     line-height: 1.5;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
   }
   .content img {
     width: 25.6%;

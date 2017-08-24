@@ -8,6 +8,12 @@ import router from './router'
 
 Vue.config.productionTip = false
 
+Vue.filter('imageUrlFilter', function(value) {
+  if (value.length) {
+    return value.replace(/http\w{0,1}:\/\//g, 'https://images.weserv.nl/?url=')
+  }
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

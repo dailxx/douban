@@ -6,3 +6,7 @@ export function getRecommendFeedList(alt = 'json', loc_id = '108288', for_mobile
       return list.data;
     });
 }
+
+// export function getInTheaters() {
+//   return
+// }
