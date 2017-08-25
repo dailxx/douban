@@ -21,6 +21,10 @@
         type: Array,
         default: null
       },
+      scrollX: {
+        type: Boolean,
+        default: false
+      },
       listenScroll: {
         type: Boolean,
         default: false
@@ -38,7 +42,8 @@
         }
         this.scroll = new BScroll(this.$refs.wrapper, {
           probeType: this.probeType,
-          click: this.click
+          click: this.click,
+          scrollX: this.scrollX
         })
 
         if (this.listenScroll) {
