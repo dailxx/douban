@@ -1,28 +1,30 @@
 <template lang="html">
   <div>
-    <movie-section :movies="showingList" class="section"></movie-section>
-    <movie-section :movies="freeList"></movie-section>
-    <movie-section :movies="latestList"></movie-section>
+    <movie-section :items="showingList" type="影院热映" style="paddingTop: 10px;"/>
+    <movie-section :items="freeList" type="免费在线观影"/>
+    <movie-section :items="latestList" type="新片速递"/>
+    <movie-section-find :topics="findList"></movie-section-find>
+    <movie-section-category></movie-section-category>
   </div>
 </template>
 
 <script>
-  import Scroll from 'base/scroll/scroll'
-  import BScroll from 'better-scroll'
-  import { getShowingMoives, getFreeMoives, getLatestMoives } from 'api/movie'
-  import MovieItem from './movie-item'
-  import MovieHeader from './movie-header'
-  import MovieSection from './movie-section'
+  import { getShowingMoives, getFreeMoives, getLatestMoives, getFindTopics } from 'api/movie'
+  import MovieSection from 'base/section/section'
+  import MovieSectionFind from 'base/section/section-find'
+  import MovieSectionCategory from 'base/section/section-category'
 
   export default {
     data() {
       return {
         showingList: [],
         freeList: [],
-        latestList: []
+        latestList: [],
+        findList: []
       }
     },
     mounted() {
+      this.findList = getFindTopics()
       getShowingMoives().then((res) => {
         this.showingList = res.subject_collection_items
       })
@@ -34,18 +36,13 @@
       })
     },
     components: {
-      Scroll,
-      MovieSection
+      MovieSection,
+      MovieSectionFind,
+      MovieSectionCategory
     }
   }
 </script>
 
 <style lang="css" scoped>
-  * {
-    margin: 0;
-    padding: 0;
-  }
-  .section {
-    padding-top: 10px;
-  }
+
 </style>

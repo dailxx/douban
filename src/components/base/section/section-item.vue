@@ -2,15 +2,24 @@
   <div>
     <img :src="imageUrl">
     <span class="title">{{ title }}</span>
+    <div class="rating">
+      <rate :value="score" :max="maxScore"></rate>
+    </div>
   </div>
 </template>
 
 <script>
+  import Rate from 'base/rate/rate'
+
   export default {
     props: {
       imageUrl: String,
       title: String,
-      rank: String
+      score: Number,
+      maxScore: Number
+    },
+    components: {
+      Rate
     }
   }
 </script>
@@ -36,5 +45,8 @@
     font-size: 15px;
     text-align: center;
     color: #111;
+  }
+  .rating {
+    margin-top: 5px;
   }
 </style>

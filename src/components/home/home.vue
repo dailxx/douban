@@ -1,31 +1,25 @@
 <template lang="html">
-  <div class="wrapper">
-    <m-header></m-header>
-    <div class="page">
-      <scroll :data="feedlist" class="scroll">
-        <div>
-          <quick-nav></quick-nav>
-          <template v-if="feedlist.length">
-            <div>
-              <feed-item v-for="feed in feedlist" :feed="feed" :key="feed.id"/>
-            </div>
-          </template>
-          <template v-else>
-            <div class="loadingContainer">
-              <loading></loading>
-            </div>
-          </template>
-        </div>
-      </scroll>
-    </div>
-  </div>
+    <scroll :data="feedlist" class="scroll">
+      <div>
+        <quick-nav></quick-nav>
+        <template v-if="feedlist.length">
+          <div>
+            <feed-item v-for="feed in feedlist" :feed="feed" :key="feed.id"/>
+          </div>
+        </template>
+        <template v-else>
+          <div class="loadingContainer">
+            <loading></loading>
+          </div>
+        </template>
+      </div>
+    </scroll>
 </template>
 
 <script>
-  import MHeader from './nav'
   import QuickNav from './quick-nav'
   import Loading from 'base/loading/loading'
-    import Scroll from 'base/scroll/scroll'
+  import Scroll from 'base/scroll/scroll'
   import { getRecommend } from 'api/home'
   import FeedItem from './feed-item'
 
@@ -48,11 +42,7 @@
         })
       }
     },
-    watch: {
-
-    },
     components: {
-      MHeader,
       QuickNav,
       Loading,
       Scroll,
@@ -62,17 +52,7 @@
 </script>
 
 <style lang="css" scoped>
-  .wrapper {
-    height: 100%;
-  }
-  .page {
-    height: 100%;
-    padding-top: 47px;
-    max-width: 650px;
-    background-color: #fff;
-    margin: 0 auto;
-    box-sizing: border-box;
-  }
+
   .scroll {
     height: 100%;
   }

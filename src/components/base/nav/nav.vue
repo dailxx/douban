@@ -41,7 +41,7 @@
     display: inline-block;
     width: 46px;
     height: 22px;
-    background-image: url('../../assets/image/logo.png');
+    background-image: url('../../../assets/image/logo.png');
     background-size: cover;
   }
   ul {
@@ -61,7 +61,7 @@
     top: 4px;
     width: 25px;
     height: 18px;
-    background-image: url('../../assets/image/search.png');
+    background-image: url('../../../assets/image/search.png');
     background-size: cover;
   }
 </style>

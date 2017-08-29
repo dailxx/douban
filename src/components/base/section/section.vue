@@ -1,14 +1,16 @@
 <template lang="html">
   <div style="overflow:hidden">
-    <movie-header type="影院热映"></movie-header>
+    <section-header :type="type"></section-header>
     <div class="content">
       <ul>
-        <li v-for="movie in movies" class="item">
-          <movie-item
-            :title="movie.title"
-            :image-url="movie.cover.url | imageUrlFilter"
-            key="movie.id">
-            </movie-item>
+        <li v-for="item in items" class="item">
+          <section-item
+            :title="item.title"
+            :image-url="item.cover.url | imageUrlFilter"
+            :score="item.rating.value"
+            :maxScore="item.rating.max"
+            key="item.id">
+            </section-item>
         </li>
       </ul>
     </div>
@@ -16,19 +18,20 @@
 </template>
 
 <script>
-  import MovieItem from './movie-item'
-  import MovieHeader from './movie-header'
+  import SectionItem from './section-item'
+  import SectionHeader from './section-header'
 
   export default {
     props: {
-      movies: {
+      items: {
         type: Array,
         default: []
-      }
+      },
+      type: String
     },
     components: {
-      MovieItem,
-      MovieHeader
+      SectionItem,
+      SectionHeader
     }
   }
 </script>

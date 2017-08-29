@@ -1,14 +1,18 @@
 <template lang="html">
   <div>
     <h2>{{ type }}</h2>
-    <span>更多</span>
+    <span v-show="showMore">更多</span>
   </div>
 </template>
 
 <script>
   export default {
     props: {
-      type: String
+      type: String,
+      showMore: {
+        type: Boolean,
+        default: true
+      }
     }
   }
 </script>
@@ -32,6 +36,7 @@
     padding-bottom: 0;
     font-size: 17px;
     font-weight: normal;
+    line-height: 24px;
   }
   span {
     font-size: 15px;

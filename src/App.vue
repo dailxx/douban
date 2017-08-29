@@ -1,15 +1,33 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <m-nav></m-nav>
+    <div class="page">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'app'
-}
+  import MNav from 'base/nav/nav'
+
+  export default {
+    name: 'app',
+    components: {
+      MNav
+    }
+  }
 </script>
 
-<style>
-
+<style style="text/css" scoped>
+  #app {
+    height: 100%;
+  }
+  .page {
+    height: 100%;
+    padding-top: 47px;
+    max-width: 650px;
+    background-color: #fff;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
 </style>
