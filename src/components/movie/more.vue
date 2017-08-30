@@ -1,15 +1,16 @@
 <template lang="html">
   <div style="height:100%">
-    <scroll class="scroll">
+    <scroll class="scroll" :data="itemList" :bounce="false">
       <div>
         <h1>影院热映</h1>
         <ul>
-          <li v-for="n in 10">
+          <li v-for="item in itemList">
             <section-item
-              title="你的名字"
-              :image-url="'https://qnmob2.doubanio.com/view/movie_poster_cover/lpst/public/p2492869476.jpg?imageView2/0/q/80/w/9999/h/400/format/jpg' | imageUrlFilter"
-              :score="5"
-              :maxScore="10">
+              :title="item.title"
+              :image-url="item.cover.url | imageUrlFilter"
+              :score="item.rating ? item.rating.value : 0"
+              :maxScore="item.rating ? item.rating.max: 0"
+              :key="item.id">
               </section-item>
           </li>
         </ul>
@@ -23,14 +24,22 @@
   import SectionItem from 'base/section/section-item'
   import { getShowingMoives, getFreeMoives, getLatestMoives } from 'api/movie'
 
+  const FetchCount = 18;
   export default {
     data() {
       return {
-        list: []
+        itemList: []
       }
     },
     mounted() {
-      this.list = 
+      this.fetchData(0, FetchCount).then((res) => {
+        this.itemList = this.itemList.concat(res.subject_collection_items)
+      })
+    },
+    methods: {
+      fetchData(start, count) {
+        return getShowingMoives(start, count)
+      }
     },
     components: {
       Scroll,

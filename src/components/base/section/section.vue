@@ -10,7 +10,7 @@
             :image-url="item.cover.url | imageUrlFilter"
             :score="item.rating ? item.rating.value : 0"
             :maxScore="item.rating ? item.rating.max: 0"
-            key="item.id">
+            :key="item.id">
             </section-item>
         </li>
       </ul>

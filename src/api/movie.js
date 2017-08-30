@@ -5,19 +5,19 @@ function getURL(type, start = 0, count = 8) {
 }
 
 export function getShowingMoives(start = 0, count = 8) {
-  return jsonp(getURL('movie_showing')).then((data) => {
+  return jsonp(getURL('movie_showing', start, count)).then((data) => {
     return data
   })
 }
 
 export function getFreeMoives(start = 0, count = 8) {
-  return jsonp(getURL('movie_free_stream')).then((data) => {
+  return jsonp(getURL('movie_free_stream', start, count)).then((data) => {
     return data
   })
 }
 
 export function getLatestMoives(start = 0, count = 8) {
-  return jsonp(getURL('movie_latest')).then((data) => {
+  return jsonp(getURL('movie_latest', start, count)).then((data) => {
     return data
   })
 }
