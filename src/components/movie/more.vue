@@ -29,6 +29,9 @@
         list: []
       }
     },
+    mounted() {
+      this.list = 
+    },
     components: {
       Scroll,
       SectionItem
