@@ -1,7 +1,7 @@
 <template lang="html">
   <div>
     <h2>{{ type }}</h2>
-    <span v-show="showMore">更多</span>
+    <span v-show="showMore" @click="handleClickMore">更多</span>
   </div>
 </template>
 
@@ -12,6 +12,11 @@
       showMore: {
         type: Boolean,
         default: true
+      }
+    },
+    methods: {
+      handleClickMore() {
+        this.$emit('clickMore')
       }
     }
   }

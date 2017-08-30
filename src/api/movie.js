@@ -1,22 +1,22 @@
 import jsonp from 'common/js/jsonp'
 
-function getURL(type) {
-  return `api/v2/subject_collection/${ type }/items?os=ios&start=0&count=8`
+function getURL(type, start = 0, count = 8) {
+  return `api/v2/subject_collection/${ type }/items?os=ios&start=${ start }&count=${ count }`
 }
 
-export function getShowingMoives() {
+export function getShowingMoives(start = 0, count = 8) {
   return jsonp(getURL('movie_showing')).then((data) => {
     return data
   })
 }
 
-export function getFreeMoives() {
+export function getFreeMoives(start = 0, count = 8) {
   return jsonp(getURL('movie_free_stream')).then((data) => {
     return data
   })
 }
 
-export function getLatestMoives() {
+export function getLatestMoives(start = 0, count = 8) {
   return jsonp(getURL('movie_latest')).then((data) => {
     return data
   })
@@ -30,4 +30,16 @@ export function getFindTopics() {
           '科幻是未来的钥匙——科幻启示录【科幻题材】',
           '美国生活面面观',
           '2015终极期待', '经典韩国电影——收集100部']
+}
+
+export function getCategories() {
+  return ['经典', '冷门佳片',
+          '豆瓣高分', '动作',
+          '喜剧', '爱情',
+          '嫌疑', '恐怖',
+          '科幻', '治愈',
+          '文艺', '成长',
+          '动画', '华语',
+          '欧美', '韩国',
+          '日本']
 }

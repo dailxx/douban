@@ -3,16 +3,7 @@
     <section-header type="分类浏览" :showMore="false"></section-header>
     <div>
       <ul>
-        <li>经典<span></span></li>
-        <li>经典<span></span></li>
-        <li>经典<span></span></li>
-        <li>经典<span></span></li>
-        <li>经典<span></span></li>
-        <li>经典<span></span></li>
-        <li>经典<span></span></li>
-        <li>经典<span></span></li>
-        <li>经典<span></span></li>
-        <li>经典<span></span></li>
+        <li v-for="category in categories">{{ category }}<span></span></li>
       </ul>
     </div>
   </div>
@@ -22,6 +13,9 @@
   import SectionHeader from './section-header'
 
   export default {
+    props: {
+      categories: Array
+    },
     components: {
       SectionHeader
     }

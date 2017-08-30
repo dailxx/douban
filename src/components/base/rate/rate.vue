@@ -1,10 +1,15 @@
 <template lang="html">
   <div class="rank">
-    <span class="rating-stars">
-      <span class="rating-star rating-star-small-full" v-for="n in stars"></span>
-      <span class="rating-star rating-star-small-gray" v-for="n in unstars"></span>
-    </span>
-    <span>{{ value | decimalFilter }}</span>
+    <template v-if="value">
+      <span class="rating-stars">
+        <span class="rating-star rating-star-small-full" v-for="n in stars"></span>
+        <span class="rating-star rating-star-small-gray" v-for="n in unstars"></span>
+      </span>
+      <span>{{ value | decimalFilter }}</span>
+    </template>
+    <template v-else>
+      <span>暂无评分</span>
+    </template>
   </div>
 </template>
 
@@ -38,6 +43,7 @@
     font-size: 12px;
     color: #aaa;
     vertical-align: middle;
+    text-align: center;
   }
   .rating-stars {
     display: inline-block;

@@ -1,17 +1,17 @@
 <template lang="html">
   <div class="header">
     <div class="content">
-      <router-link :to="{ name: 'Home'}">
+      <router-link :to="{ path: '/home'}">
         <div class="logo"></div>
       </router-link>
       <div>
         <ul>
-          <router-link :to="{ name: 'Movie'}" tag="li" style="color: #2384E8;">电影</router-link>
-          <router-link :to="{ name: 'Book'}" tag="li" style="color: #9F7860;">图书</router-link>
-          <router-link :to="{ name: 'Broadcast'}" tag="li" style="color: #E4A813;">广播</router-link>
-          <router-link :to="{ name: 'Group'}" tag="li" style="color: #2AB8CC;">小组</router-link>
+          <router-link :to="{ path: '/movie'}" tag="li" style="color: #2384E8;">电影</router-link>
+          <router-link :to="{ path: '/book'}" tag="li" style="color: #9F7860;">图书</router-link>
+          <router-link :to="{ path: '/broadcast'}" tag="li" style="color: #E4A813;">广播</router-link>
+          <router-link :to="{ path: '/group'}" tag="li" style="color: #2AB8CC;">小组</router-link>
         </ul>
-        <router-link :to="{ name: 'Search'}" tag="span"></router-link>
+        <router-link :to="{ path: '/search'}" tag="span"></router-link>
       </div>
     </div>
   </div>

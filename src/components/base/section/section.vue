@@ -1,14 +1,15 @@
 <template lang="html">
   <div style="overflow:hidden">
-    <section-header :type="type"></section-header>
+    <section-header :type="type" @clickMore="handleClickMore"></section-header>
+    <slot></slot>
     <div class="content">
       <ul>
         <li v-for="item in items" class="item">
           <section-item
             :title="item.title"
             :image-url="item.cover.url | imageUrlFilter"
-            :score="item.rating.value"
-            :maxScore="item.rating.max"
+            :score="item.rating ? item.rating.value : 0"
+            :maxScore="item.rating ? item.rating.max: 0"
             key="item.id">
             </section-item>
         </li>
@@ -25,9 +26,14 @@
     props: {
       items: {
         type: Array,
-        default: []
+        default: null
       },
       type: String
+    },
+    methods: {
+      handleClickMore() {
+        this.$emit('clickMore')
+      }
     },
     components: {
       SectionItem,
@@ -37,10 +43,6 @@
 </script>
 
 <style lang="css" scoped>
-  * {
-    margin: 0;
-    padding: 0;
-  }
   .content {
     margin-bottom: -18px;
   }

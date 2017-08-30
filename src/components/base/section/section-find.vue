@@ -33,7 +33,7 @@
     },
     methods: {
       randomColor() {
-        this.count++
+        // this.count++
         if (this.count %  2 === 0) {
           return this.currentColor
         } else {

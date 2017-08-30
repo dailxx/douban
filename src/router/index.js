@@ -8,6 +8,7 @@ import Group from 'components/group/group'
 import Search from 'components/search/search'
 import TV from 'components/tv/tv'
 import Music from 'components/music/music'
+import MovieMore from 'components/movie/more'
 
 Vue.use(Router)
 
@@ -16,42 +17,42 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Home',
+      component: Home
+    },
+    {
+      path: '/home',
       component: Home
     },
     {
       path: '/movie',
-      name: 'Movie',
       component: Movie
     },
     {
+      path: '/movie/nowintheater',
+      component: MovieMore
+    },
+    {
       path: '/book',
-      name: 'Book',
       component: Book
     },
     {
       path: '/broadcast',
-      name: 'Broadcast',
       component: Broadcast
     },
     {
       path: '/group',
-      name: 'Group',
       component: Group
     },
     {
       path: '/search',
-      name: 'Search',
       component: Search
     },
     {
       path: '/music',
-      name: 'Music',
       component: Music
     },
     {
       path: '/tv',
-      name: 'TV',
       component: TV
     }
   ]
