@@ -1,18 +1,16 @@
 <template lang="html">
     <scroll :data="feedlist" class="scroll">
-      <div>
-        <quick-nav></quick-nav>
-        <template v-if="feedlist.length">
-          <div>
-            <feed-item v-for="feed in feedlist" :feed="feed" :key="feed.id"/>
-          </div>
-        </template>
-        <template v-else>
-          <div class="loadingContainer">
-            <loading></loading>
-          </div>
-        </template>
-      </div>
+      <quick-nav></quick-nav>
+      <template v-if="feedlist.length">
+        <div>
+          <feed-item v-for="feed in feedlist" :feed="feed" :key="feed.id"/>
+        </div>
+      </template>
+      <template v-else>
+        <div class="loadingContainer">
+          <loading></loading>
+        </div>
+      </template>
     </scroll>
 </template>
 
