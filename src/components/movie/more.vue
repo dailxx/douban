@@ -3,9 +3,8 @@
     <scroll ref="scroll"
             class="scroll"
             :data="itemList"
-            :pullDownRefresh="pullDownRefreshObj"
+            :bounce="false"
             :pullUpLoad="pullUpLoadObj"
-            @pullingDown="onPullingDown"
             @pullingUp="onPullingUp">
       <h1>影院热映</h1>
       <ul>
@@ -19,6 +18,16 @@
             </section-item>
         </li>
       </ul>
+      <template slot="pullup" scope="props">
+        <div class="pullup-wrapper" v-if="props.pullUpLoad">
+          <div class="before-trigger" v-if="!props.isPullUpLoad">
+            <span>123</span>
+          </div>
+          <div class="after-trigger" v-else>
+            <span>456</span>
+          </div>
+        </div>
+      </template>
     </scroll>
   </div>
 </template>
@@ -41,12 +50,6 @@
       })
     },
     computed: {
-      pullDownRefreshObj() {
-        return {
-          threshold: 90,
-          stop: 40
-        }
-      },
       pullUpLoadObj() {
         return {
           threshold: 50
@@ -56,18 +59,6 @@
     methods: {
       fetchData(start, count) {
         return getShowingMoives(start, count)
-      },
-      onPullingDown() {
-        // 模拟更新数据
-        setTimeout(() => {
-          if (Math.random() > 0.5) {
-            // 如果有新数据
-            this.$refs.scroll.forceUpdate(true)
-          } else {
-            // 如果没有新数据
-            this.$refs.scroll.forceUpdate()
-          }
-        }, 1000)
       },
       onPullingUp() {
         // 更新数据

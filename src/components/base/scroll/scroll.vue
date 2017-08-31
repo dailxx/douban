@@ -24,7 +24,7 @@
           :pulling="pulling">
       <div class="pulldown-wrapper" :style="pullDownStyle" v-if="pullDownRefresh">
         <div class="before-trigger" v-if="beforePullDown">
-          <span>下拉即可刷新</span>
+          <loading></loading>
         </div>
         <div class="after-trigger" v-else>
           <div v-if="pulling">
@@ -207,15 +207,12 @@
         })
 
         this.scroll.on('scroll', (pos) => {
-          console.log(pos);
           if (this.beforePullDown) {
-            this.pullDownStyle = `top:${ Math.min(pos.y + this.pullDownInitTop, 10) }px`
-          } else {
-
+            this.pullDownStyle = `top:${ Math.min(pos.y + this.pullDownInitTop, 0) }px`
           }
 
           if (this.isRebounding) {
-            this.pullDownStyle = `top:${ 10 - (this.pullDownRefresh.stop - pos.y) }px`
+            this.pullDownStyle = `top:${ - (this.pullDownRefresh.stop - pos.y) }px`
           }
         })
       },
@@ -267,8 +264,11 @@
     align-items: center;
     transition: all;
   }
+  .pulldown-wrapper .before-trigger {
+    padding: 16px 0;
+  }
   .pulldown-wrapper .after-trigger {
-    margin-top: 10px;
+    margin-top: 16px;
   }
   .pullup-wrapper {
     width: 100%;
