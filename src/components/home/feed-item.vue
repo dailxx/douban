@@ -1,21 +1,55 @@
 <template lang="html">
-  <a href="#" class="item">
+  <div class="item">
     <div class="content">
       <div class="desc">
-        <h3>{{ feed.title }}</h3>
-        <p>{{ feed.target.desc }}</p>
+        <h3>{{ title}}</h3>
+        <p>{{ desc }}</p>
       </div>
-      <img :src="feed.target.cover_url | imageUrlFilter" v-show="feed.target.cover_url.length">
+      <div class="cover" :style="coverStyle" v-show="imageUrl.length">
+        <div style="paddingTop:100%">
+        </div>
+      </div>
+      <!-- <img :src="imageUrl | imageUrlFilter" v-show="imageUrl.length"> -->
     </div>
     <div class="other">
-      <span>by {{ feed.target.author.name }}</span>
-      <span>{{ feed.source_cn }}</span>
+      <span>by {{ author }}</span>
+      <span>{{ source }}</span>
     </div>
-  </a>
+  </div>
 </template>
 
 <script>
+  import Vue from 'vue'
+
   export default {
+    computed: {
+      title() {
+        return this.feed.title
+      },
+      desc() {
+        return this.feed.target.desc
+      },
+      imageUrl() {
+        return this.feed.target.cover_url
+      },
+      author() {
+        return this.feed.target.author.name
+      },
+      source() {
+        return this.feed.source_cn
+      },
+      coverStyle() {
+        let filter = Vue.filter('imageUrlFilter')
+
+        return {
+          backgroundColor: 'rgb(250, 250, 250)',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundImage: `url('${ filter(this.imageUrl) }')`
+        }
+      }
+    },
     props: {
       feed: {
         type: Object,
@@ -26,12 +60,8 @@
 </script>
 
 <style lang="css" scoped>
-  * {
+  h3, p {
     margin: 0;
-    padding: 0;
-  }
-  a {
-    text-decoration: none;
   }
   .item {
     display: flex;
@@ -46,11 +76,12 @@
     display: flex;
     margin-bottom: 10px;
     overflow: hidden;
+    align-items: flex-start;
   }
   .content .desc {
     display: flex;
     flex-direction: column;
-    flex: 1
+    flex: 1;
   }
   .content .desc h3 {
     text-align: justify;
@@ -69,10 +100,8 @@
     overflow: hidden;
     -webkit-line-clamp: 3;
   }
-  .content img {
+  .content .cover {
     width: 25.6%;
-    height: 86.78px;
-    float: right;
     margin-left: 25px;
   }
   .other {

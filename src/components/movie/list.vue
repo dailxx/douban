@@ -1,12 +1,12 @@
 <template lang="html">
-  <div style="height:100%">
+  <div class="more-wrapper">
     <scroll ref="scroll"
             class="scroll"
             :data="itemList"
             :bounce="false"
             :pullUpLoad="pullUpLoadObj"
             @pullingUp="onPullingUp">
-      <h1>影院热映</h1>
+      <h1>{{ headerTitle }}</h1>
       <ul>
         <li v-for="item in itemList">
           <section-item
@@ -14,20 +14,13 @@
             :image-url="item.cover.url | imageUrlFilter"
             :score="item.rating ? item.rating.value : 0"
             :maxScore="item.rating ? item.rating.max: 0"
+            :action="item.actions[0]"
+            :smallFont="true"
             :key="item.id">
             </section-item>
         </li>
       </ul>
-      <template slot="pullup" scope="props">
-        <div class="pullup-wrapper" v-if="props.pullUpLoad">
-          <div class="before-trigger" v-if="!props.isPullUpLoad">
-            <span>123</span>
-          </div>
-          <div class="after-trigger" v-else>
-            <span>456</span>
-          </div>
-        </div>
-      </template>
+      <div slot="pullup"></div>
     </scroll>
   </div>
 </template>
@@ -44,34 +37,66 @@
         itemList: []
       }
     },
+    props: {
+      type: String
+    },
+    created() {
+      this.start = 0
+      this.total = 0
+    },
     mounted() {
       this.fetchData(0, FetchCount).then((res) => {
         this.itemList = this.itemList.concat(res.subject_collection_items)
+        this.total = res.total
       })
     },
     computed: {
       pullUpLoadObj() {
         return {
-          threshold: 50
+          threshold: 10
+        }
+      },
+      headerTitle() {
+        const { params } = this.$route;
+
+        if (params.type === 'nowintheater') {
+          return '影院热映'
+        } else if (params.type === 'watchonline') {
+          return '免费在线观影'
+        } else if (params.type === 'latest') {
+          return '新片速递'
         }
       }
     },
     methods: {
       fetchData(start, count) {
-        return getShowingMoives(start, count)
+        const { params } = this.$route;
+
+        let proxy = getShowingMoives
+        if (params.type === 'watchonline') {
+          proxy = getFreeMoives
+        } else if (params.type === 'latest') {
+          proxy = getLatestMoives
+        }
+
+        return proxy(start, count).then((res) => {
+          this.start = start + count
+          return res
+        })
       },
       onPullingUp() {
-        // 更新数据
-        setTimeout(() => {
-          if (Math.random() > 0.5) {
-            // 如果有新数据
-            console.log('新数据');
+        if (this.itemList.length < this.total) {
+          // 加载数据
+          this.fetchData(this.start, FetchCount).then((res) => {
+            let items = res.subject_collection_items
+            for (let item of items) {
+              if (this.itemList.length < this.total) {
+                this.itemList.push(item)
+              }
+            }
             this.$refs.scroll.forceUpdate(true)
-          } else {
-            // 如果没有新数据
-            this.$refs.scroll.forceUpdate()
-          }
-        }, 1000)
+          })
+        }
       }
     },
     components: {
@@ -82,6 +107,11 @@
 </script>
 
 <style lang="css" scoped>
+  .more-wrapper {
+    height: 100%;
+    padding: 0 2%;
+    -webkit-font-smoothing: antialiased;
+  }
   h1 {
     color: #494949;
     font-size: 24px;

@@ -8,7 +8,7 @@ import Group from 'components/group/group'
 import Search from 'components/search/search'
 import TV from 'components/tv/tv'
 import Music from 'components/music/music'
-import MovieMore from 'components/movie/more'
+import MovieList from 'components/movie/list'
 
 Vue.use(Router)
 
@@ -28,8 +28,8 @@ export default new Router({
       component: Movie
     },
     {
-      path: '/movie/nowintheater',
-      component: MovieMore
+      path: '/movie/:type',
+      component: MovieList
     },
     {
       path: '/book',

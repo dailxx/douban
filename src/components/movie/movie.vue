@@ -2,17 +2,17 @@
   <div>
     <movie-section
       :items="showingList"
-      type="影院热映"
-      @clickMore="handleClickMore"
+      :type="nowintheater"
+      @clickMore="handleClickMore(nowintheater)"
       style="paddingTop: 10px;"/>
     <movie-section
       :items="freeList"
-      type="免费在线观影"
-      @clickMore="handleClickMore"/>
+      :type="watchonline"
+      @clickMore="handleClickMore(watchonline)"/>
     <movie-section
       :items="latestList"
-      type="新片速递"
-      @clickMore="handleClickMore"/>
+      :type="latest"
+      @clickMore="handleClickMore(latest)"/>
     <movie-section-find :topics="findList"></movie-section-find>
     <movie-section-category :categories="categoryList"></movie-section-category>
     <router-view></router-view>
@@ -25,6 +25,10 @@
   import MovieSectionFind from 'base/section/section-find'
   import MovieSectionCategory from 'base/section/section-category'
 
+  const NowInTheater = '影院热映'
+  const WatchOnline = '免费在线观影'
+  const Latest = '新片速递'
+
   export default {
     data() {
       return {
@@ -32,7 +36,11 @@
         freeList: [],
         latestList: [],
         findList: [],
-        categoryList: []
+        categoryList: [],
+
+        nowintheater: NowInTheater,
+        watchonline: WatchOnline,
+        latest: Latest
       }
     },
     mounted() {
@@ -49,8 +57,14 @@
       })
     },
     methods: {
-      handleClickMore() {
-        this.$router.push({ path: '/movie/nowintheater' })
+      handleClickMore(type) {
+        if (type === NowInTheater) {
+          this.$router.push({ path: '/movie/nowintheater' })
+        } else if (type === WatchOnline) {
+          this.$router.push({ path: '/movie/watchonline' })
+        } else {
+          this.$router.push({ path: '/movie/latest' })
+        }
       }
     },
     components: {
