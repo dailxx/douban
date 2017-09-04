@@ -15,7 +15,6 @@
       @clickMore="handleClickMore(latest)"/>
     <movie-section-find :topics="findList"></movie-section-find>
     <movie-section-category :categories="categoryList"></movie-section-category>
-    <router-view></router-view>
   </div>
 </template>
 
@@ -75,6 +74,6 @@
   }
 </script>
 
-<style lang="css" scoped>
+<style lang="css">
 
 </style>
