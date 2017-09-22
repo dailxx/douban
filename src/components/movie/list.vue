@@ -31,6 +31,7 @@
   import { getShowingMoives, getFreeMoives, getLatestMoives } from 'api/movie'
 
   const FetchCount = 18;
+  
   export default {
     data() {
       return {

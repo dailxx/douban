@@ -9,6 +9,7 @@ import Search from 'components/search/search'
 import TV from 'components/tv/tv'
 import Music from 'components/music/music'
 import MovieList from 'components/movie/list'
+import BookList from 'components/book/list'
 
 Vue.use(Router)
 
@@ -34,6 +35,10 @@ export default new Router({
     {
       path: '/book',
       component: Book
+    },
+    {
+      path: '/book/:type',
+      component: BookList
     },
     {
       path: '/broadcast',

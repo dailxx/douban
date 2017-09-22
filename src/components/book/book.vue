@@ -19,10 +19,10 @@
           :alt="storeHeader.title"/>
         <div class="content">
           <div class="title">
-            <p class="name">自由与爱之地</p>
-            <span class="price">¥ 49</span>
+            <span class="name">{{ storeHeader.title }}&nbsp;</span>
+            <span class="price">¥ {{ storeHeader.price }}</span>
           </div>
-          <p class="infoWithoutReviewer">应许之地的爱与自由，一场31天以色列非典型旅行</p>
+          <p class="infoWithoutReviewer">{{ storeHeader.info }}</p>
         </div>
       </div>
     </book-section>
@@ -37,8 +37,8 @@
   import BookSectionFind from 'base/section/section-find'
   import BookSectionCategory from 'base/section/section-category'
 
-  const Fiction = '最受关注图书｜虚构类'
-  const Nofiction = '最受关注图书｜非虚构类'
+  const HotFiction = '最受关注图书｜虚构类'
+  const HotNofiction = '最受关注图书｜非虚构类'
   const MobileStore = '豆瓣书店'
 
   export default {
@@ -51,8 +51,8 @@
         categoryList: [],
         storeHeader: null,
 
-        fiction: Fiction,
-        nofiction: Nofiction,
+        fiction: HotFiction,
+        nofiction: HotNofiction,
         mobileStore: MobileStore
       }
     },
@@ -72,7 +72,13 @@
     },
     methods: {
       handleClickMore(type) {
-
+        if (type === HotFiction) {
+          this.$router.push({ path: '/book/hotfiction' })
+        } else if (type === HotNofiction) {
+          this.$router.push({ path: '/book/hotnofiction' })
+        } else {
+          this.$router.push({ path: '/book/mobilestore' })
+        }
       }
     },
     components: {
@@ -98,9 +104,32 @@
     display: flex;
     flex-direction: column;
   }
+  .title {
+    display: flex;
+    margin: 10px 0;
+    justify-content: space-between;
+  }
   .name {
-    display: inline;
     font-size: 19px;
     color: #494949;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+  }
+  .price {
+    color: #e76648;
+    font-size: 16px;
+    line-height: 22px;
+  }
+  .infoWithoutReviewer {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: #9b9b9b;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
   }
 </style>
