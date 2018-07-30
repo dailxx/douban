@@ -43,7 +43,7 @@
     font-size: 12px;
     color: #aaa;
     vertical-align: middle;
-    text-align: center;
+    /*text-align: center;*/
   }
   .rating-stars {
     display: inline-block;

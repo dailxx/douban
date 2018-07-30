@@ -11,7 +11,7 @@
             :score="item.rating ? item.rating.value : 0"
             :maxScore="item.rating ? item.rating.max: 0"
             :key="item.id">
-            </section-item>
+          </section-item>
         </li>
       </ul>
     </div>

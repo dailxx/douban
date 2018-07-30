@@ -1,16 +1,15 @@
 <template lang="html">
     <scroll :data="feedlist" class="scroll">
       <quick-nav></quick-nav>
-      <template v-if="feedlist.length">
-        <div>
-          <feed-item v-for="feed in feedlist" :feed="feed" :key="feed.id"/>
+      <div v-if="feedlist.length">
+        <div v-for="feed in feedlist" :key="feed.id">
+          <feed-item-grid :feed="feed" v-if="feed.layout === 5"></feed-item-grid>
+          <feed-item-general :feed="feed" v-else></feed-item-general>
         </div>
-      </template>
-      <template v-else>
-        <div class="loadingContainer">
-          <loading></loading>
-        </div>
-      </template>
+      </div>
+      <div class="loadingContainer" v-else>
+        <loading></loading>
+      </div>
     </scroll>
 </template>
 
@@ -18,8 +17,9 @@
   import QuickNav from './quick-nav'
   import Loading from 'base/loading/loading'
   import Scroll from 'base/scroll/scroll'
+  import FeedItemGeneral from './feed-item-general'
+  import FeedItemGrid from './feed-item-grid'
   import { getRecommend } from 'api/home'
-  import FeedItem from './feed-item'
 
   export default {
     data() {
@@ -44,13 +44,13 @@
       QuickNav,
       Loading,
       Scroll,
-      FeedItem
+      FeedItemGeneral,
+      FeedItemGrid
     }
   }
 </script>
 
 <style lang="css" scoped>
-
   .scroll {
     height: 100%;
   }
